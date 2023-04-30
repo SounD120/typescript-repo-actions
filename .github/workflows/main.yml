@@ -1,0 +1,17 @@
+name: 'Run action'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  run: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    env: 
+      TOKEN: ${{ github.token }}
+    steps:
+      - uses: SounD120/typescript-repo-actions@v1.0
+        with:
+          action-mode: 'issues'
