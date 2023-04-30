@@ -41,36 +41,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
-var ActionMode;
-(function (ActionMode) {
-    ActionMode["Issues"] = "issues";
-    ActionMode["IssuesOpen"] = "issues-open";
-    ActionMode["IssuesClosed"] = "issues-closed";
-    ActionMode["IssuesOpenedSinceData"] = "issues-opened-since-date";
-})(ActionMode || (ActionMode = {}));
-// The amount of PR/issues total
-// The amount of open PRs/issues
-// The amount of closed PRs/issue
-// how many issues/PRs were opened in the last month (or custom date that can be passed as an input)
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const mode = core.getInput('action-mode');
             let headersConfig = {};
             switch (mode) {
-                case ActionMode.Issues: {
+                case 'issues': {
                     headersConfig = { state: 'all' };
                     break;
                 }
-                case ActionMode.IssuesOpen: {
+                case 'issues-open': {
                     headersConfig = { state: 'open' };
                     break;
                 }
-                case ActionMode.IssuesClosed: {
+                case 'issues-closed': {
                     headersConfig = { state: 'closed' };
                     break;
                 }
-                case ActionMode.IssuesOpenedSinceData: {
+                case 'issues-opened-since-date': {
                     const date = core.getInput('issues-from-date');
                     const dateParsed = Date.parse(date);
                     const dateNow = new Date();
