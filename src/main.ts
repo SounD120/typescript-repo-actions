@@ -5,6 +5,9 @@ async function run(): Promise<void> {
   try {
     const mode = core.getInput('action-mode')
 
+    const owner = core.getInput('owner')
+    const repo = core.getInput('repo')
+
     let headersConfig = {}
 
     switch (mode) {
@@ -34,9 +37,12 @@ async function run(): Promise<void> {
     }
 
     const octokit = github.getOctokit(process.env.TOKEN || '')
-    const result = await octokit.request('GET /issues', {
+    const result = await octokit.request('GET /repos/{owner}/{repo}/issues', {
+      owner,
+      repo,
       headers: {
         'X-GitHub-Api-Version': '2022-11-28',
+        accept: 'application/vnd.github+json',
         filter: 'all',
         ...headersConfig
       }
