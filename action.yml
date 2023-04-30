@@ -1,11 +1,20 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Get count of issues in repo'
+description: 'Returns amount of open/closed PRs/issues in the repository based on action-mode'
+author: 'Yuri Skorokhodov'
 inputs:
-  milliseconds: # change this
+  action-mode:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: Can be 'issues', 'issues-open', 'issues-closed', 'issues-opened-since-date'
+    default: 'issues'
+  issues-from-date:
+    required: false
+    description: Used in case of 'issues-opened-since-date' mode, in such case returns amount of issues created from the date. This is a timestamp in ISO 8601 format
+  token:
+    description: Used to work with Github API. Since there's a default, this is typically not supplied by the user.
+    default: ${{ github.server_url == 'https://github.com' && github.token || '' }}
+outputs:
+  answer:
+    description: 'Amount of PRs/issues in the repository based on chosen action-mode'
 runs:
   using: 'node16'
   main: 'dist/index.js'
