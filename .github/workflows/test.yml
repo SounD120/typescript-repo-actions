@@ -23,6 +23,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./
         with:
-          action-mode: 'issues-all'
+          action-mode: 'issues-closed'
           owner: SounD120
           repo: typescript-repo-actions
