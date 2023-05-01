@@ -17,8 +17,33 @@ jobs:
           npm run all
   test: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
+    env: 
+      TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v3
       - uses: ./
         with:
-          milliseconds: 1000
+          action-mode: 'issues-all'
+          owner: SounD120
+          repo: typescript-repo-actions
+      - uses: ./
+        with:
+          action-mode: 'issues-open'
+          owner: SounD120
+          repo: typescript-repo-actions
+      - uses: ./
+        with:
+          action-mode: 'issues-closed'
+          owner: SounD120
+          repo: typescript-repo-actions
+      - uses: ./
+        with:
+          action-mode: 'issues-opened-since-date'
+          issues-from-date: 2023-05-01T11:58:52.185Z
+          owner: SounD120
+          repo: typescript-repo-actions
+      - uses: ./
+        with:
+          action-mode: 'issues-opened-since-date'
+          owner: SounD120
+          repo: typescript-repo-actions
